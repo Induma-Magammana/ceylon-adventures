@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Search, MapPin, Calendar, Users, Star, Waves, TreePine, Mountain, Anchor, Sailboat, Car } from "lucide-react";
 import { heroImage, activityImages } from "@/assets/images";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,8 @@ const featured = [
 ];
 
 function Index() {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -51,7 +53,7 @@ function Index() {
             <a href="#" className="hover:underline">List your activity</a>
             <a href="#" className="hover:underline">Help</a>
             <a href="#" className="hover:underline">LKR</a>
-            <Button className="bg-white text-header hover:bg-white/90" size="sm">Sign in</Button>
+            <Button onClick={() => navigate({ to: '/login' })} className="bg-white text-header hover:bg-white/90" size="sm">Sign in</Button>
           </nav>
         </div>
       </header>

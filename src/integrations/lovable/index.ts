@@ -2,6 +2,7 @@
 
 import { createLovableAuth } from "@lovable.dev/cloud-auth-js";
 import { supabase } from "../supabase/client";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 const lovableAuth = createLovableAuth();
 
 type SignInOptions = {
@@ -36,3 +37,16 @@ export const lovable = {
     },
   },
 };
+
+function Index() {
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <h1>Home Page</h1>
+      <button onClick={() => navigate({ to: '/login' })} className="bg-white text-header hover:bg-white/90" size="sm">Sign in</button>
+    </>
+  );
+}
+
+export default Index;
