@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, MapPin, Calendar, Users, Star, Waves, TreePine, Mountain, Anchor, Sailboat, Car } from "lucide-react";
 import { heroImage, activityImages } from "@/assets/images";
 import { Button } from "@/components/ui/button";
+import { useAuth, signOut } from "@/lib/auth/use-auth";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -47,12 +48,7 @@ function Index() {
           <a href="/" className="text-xl font-bold tracking-tight">
             Ceylon<span className="text-accent">Booking</span>
           </a>
-          <nav className="hidden items-center gap-6 text-sm md:flex">
-            <a href="#" className="hover:underline">List your activity</a>
-            <a href="#" className="hover:underline">Help</a>
-            <a href="#" className="hover:underline">LKR</a>
-            <Button className="bg-white text-header hover:bg-white/90" size="sm">Sign in</Button>
-          </nav>
+          <HeaderNav />
         </div>
       </header>
 
@@ -185,5 +181,33 @@ function Index() {
         </div>
       </footer>
     </div>
+  );
+}
+
+function HeaderNav() {
+  const { loading, user } = useAuth();
+  return (
+    <nav className="hidden items-center gap-6 text-sm md:flex">
+      <Link to="/auth" className="hover:underline">List your activity</Link>
+      <a href="#" className="hover:underline">Help</a>
+      <a href="#" className="hover:underline">LKR</a>
+      {loading ? null : user ? (
+        <>
+          <Link to="/profile" className="hover:underline">{user.email}</Link>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => signOut()}
+            className="border-white/40 bg-transparent text-white hover:bg-white/10"
+          >
+            Sign out
+          </Button>
+        </>
+      ) : (
+        <Link to="/auth">
+          <Button className="bg-white text-header hover:bg-white/90" size="sm">Sign in</Button>
+        </Link>
+      )}
+    </nav>
   );
 }
