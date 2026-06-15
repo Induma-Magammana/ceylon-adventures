@@ -1,7 +1,8 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Search, MapPin, Calendar, Users, Star, Waves, TreePine, Mountain, Anchor, Sailboat, Car } from "lucide-react";
 import { heroImage, activityImages } from "@/assets/images";
 import { Button } from "@/components/ui/button";
+import { useAuth, signOut } from "@/lib/auth/use-auth";
 
 export const Route = createFileRoute("/")({
   head: () => ({
