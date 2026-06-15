@@ -48,12 +48,7 @@ function Index() {
           <a href="/" className="text-xl font-bold tracking-tight">
             Ceylon<span className="text-accent">Booking</span>
           </a>
-          <nav className="hidden items-center gap-6 text-sm md:flex">
-            <a href="#" className="hover:underline">List your activity</a>
-            <a href="#" className="hover:underline">Help</a>
-            <a href="#" className="hover:underline">LKR</a>
-            <Button className="bg-white text-header hover:bg-white/90" size="sm">Sign in</Button>
-          </nav>
+          <HeaderNav />
         </div>
       </header>
 
