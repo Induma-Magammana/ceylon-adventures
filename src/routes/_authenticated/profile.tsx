@@ -41,7 +41,7 @@ function ProfilePage() {
           <h1 className="text-2xl font-bold">My profile</h1>
           <p className="mt-1 text-sm text-muted-foreground">{user?.email}</p>
           <div className="mt-4 flex flex-wrap gap-2">
-            {roles.map((r) => (
+            {roles.map((r: string) => (
               <span key={r} className="rounded bg-primary/10 px-2 py-1 text-xs font-bold uppercase text-primary">
                 {r}
               </span>
