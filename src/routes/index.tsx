@@ -187,3 +187,31 @@ function Index() {
     </div>
   );
 }
+
+function HeaderNav() {
+  const { loading, user } = useAuth();
+  return (
+    <nav className="hidden items-center gap-6 text-sm md:flex">
+      <Link to="/auth" className="hover:underline">List your activity</Link>
+      <a href="#" className="hover:underline">Help</a>
+      <a href="#" className="hover:underline">LKR</a>
+      {loading ? null : user ? (
+        <>
+          <Link to="/profile" className="hover:underline">{user.email}</Link>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => signOut()}
+            className="border-white/40 bg-transparent text-white hover:bg-white/10"
+          >
+            Sign out
+          </Button>
+        </>
+      ) : (
+        <Link to="/auth">
+          <Button className="bg-white text-header hover:bg-white/90" size="sm">Sign in</Button>
+        </Link>
+      )}
+    </nav>
+  );
+}
