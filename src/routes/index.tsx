@@ -1,7 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { Search, MapPin, Calendar, Users, Star, Waves, TreePine, Mountain, Anchor, Sailboat, Car } from "lucide-react";
 import { heroImage, activityImages } from "@/assets/images";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,6 +42,15 @@ const featured = [
 
 function Index() {
   const navigate = useNavigate();
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await supabase.auth.getSession();
+      const isSignedIn = !!data.session?.user?.id;
+      setSignedIn(isSignedIn);
+    })();
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -53,7 +64,11 @@ function Index() {
             <a href="#" className="hover:underline">List your activity</a>
             <a href="#" className="hover:underline">Help</a>
             <a href="#" className="hover:underline">LKR</a>
-            <Button onClick={() => navigate({ to: '/login' })} className="bg-white text-header hover:bg-white/90" size="sm">Sign in</Button>
+            {!signedIn && (
+              <Button onClick={() => navigate({ to: '/login' })} className="bg-white text-header hover:bg-white/90" size="sm">
+                Sign in
+              </Button>
+            )}
           </nav>
         </div>
       </header>

@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as RegisterRouteImport } from './routes/register'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DashboardCustomerRouteImport } from './routes/dashboard/customer'
 import { Route as AuthSelectRoleRouteImport } from './routes/auth/select-role'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -29,6 +30,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardCustomerRoute = DashboardCustomerRouteImport.update({
+  id: '/dashboard/customer',
+  path: '/dashboard/customer',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthSelectRoleRoute = AuthSelectRoleRouteImport.update({
   id: '/auth/select-role',
   path: '/auth/select-role',
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/auth/select-role': typeof AuthSelectRoleRoute
+  '/dashboard/customer': typeof DashboardCustomerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/auth/select-role': typeof AuthSelectRoleRoute
+  '/dashboard/customer': typeof DashboardCustomerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,25 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/auth/select-role': typeof AuthSelectRoleRoute
+  '/dashboard/customer': typeof DashboardCustomerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/register' | '/auth/select-role'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/auth/select-role'
+    | '/dashboard/customer'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/register' | '/auth/select-role'
-  id: '__root__' | '/' | '/login' | '/register' | '/auth/select-role'
+  to: '/' | '/login' | '/register' | '/auth/select-role' | '/dashboard/customer'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/register'
+    | '/auth/select-role'
+    | '/dashboard/customer'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +87,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   RegisterRoute: typeof RegisterRoute
   AuthSelectRoleRoute: typeof AuthSelectRoleRoute
+  DashboardCustomerRoute: typeof DashboardCustomerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -92,6 +113,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/customer': {
+      id: '/dashboard/customer'
+      path: '/dashboard/customer'
+      fullPath: '/dashboard/customer'
+      preLoaderRoute: typeof DashboardCustomerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth/select-role': {
       id: '/auth/select-role'
       path: '/auth/select-role'
@@ -107,6 +135,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   RegisterRoute: RegisterRoute,
   AuthSelectRoleRoute: AuthSelectRoleRoute,
+  DashboardCustomerRoute: DashboardCustomerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

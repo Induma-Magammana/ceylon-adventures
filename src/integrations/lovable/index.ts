@@ -44,7 +44,7 @@ function Index() {
   return (
     <>
       <h1>Home Page</h1>
-      <button onClick={() => navigate({ to: '/login' })} className="bg-white text-header hover:bg-white/90" size="sm">Sign in</button>
+      <button onClick={() => navigate({ to: "/login" })} className="bg-white text-header hover:bg-white/90">Sign In</button>
     </>
   );
 }
